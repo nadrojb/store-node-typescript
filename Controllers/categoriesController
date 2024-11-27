@@ -1,24 +1,14 @@
-const { MongoClient } = require("mongodb");
-const url = "mongodb://root:password@localhost:27017";
+import dbSettings from "../environments";
+const mysql = require("promise-mysql");
 
-const categories = async (req, res) => {
-  try {
-    const connection = await MongoClient.connect(url);
-
-    const db = connection.db("furniture_store");
-    const collection = db.collection("products");
-
-    const categories = await collection.distinct("category");
-
-    res.status(200).json({
-      message: "Successfully found categories.",
-      data: categories,
-    });
-  } catch (error) {
-    res.status(500).json({
-      message: { message: "Unexpected error", data: [] },
-    });
-  }
+const category = async (req, res) => {
+  const db = await mysql.createConnection(dbSettings);
+  const output = await db.query("SELECT DISTINCT `category` FROM `products`");
+  const categories = output.map((output) => output.categories);
+  res.json({
+    message: "Successfully found characters.",
+    data: category,
+  });
 };
 
-module.exports = categories;
+module.exports = category;
