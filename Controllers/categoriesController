@@ -1,0 +1,24 @@
+const { MongoClient } = require("mongodb");
+const url = "mongodb://root:password@localhost:27017";
+
+const categories = async (req, res) => {
+  try {
+    const connection = await MongoClient.connect(url);
+
+    const db = connection.db("furniture_store");
+    const collection = db.collection("products");
+
+    const categories = await collection.distinct("category");
+
+    res.status(200).json({
+      message: "Successfully found categories.",
+      data: categories,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: { message: "Unexpected error", data: [] },
+    });
+  }
+};
+
+module.exports = categories;
