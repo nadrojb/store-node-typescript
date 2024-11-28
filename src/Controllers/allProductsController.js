@@ -6,7 +6,10 @@ const allProducts = async (req, res) => {
   try {
     const db = await mysql.createConnection(dbSettings);
     const rows = await db.query(
-      `SELECT * FROM products WHERE name=? ORDER BY id`,
+      ` SELECT products.id, products.name, products.price, products.stock, products.color
+        FROM products
+        LEFT JOIN categories ON products.name = categories.category
+        WHERE categories.id = ?;`,
       [cat]
     );
 
