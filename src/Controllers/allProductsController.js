@@ -12,7 +12,7 @@ const allProducts = async (req, res) => {
 
     const products = rows.map((row) => ({
       id: row.id,
-      price: row.price,
+      price: formatPrice(row.price),
       stock: row.stock,
       color: row.color,
     }));
@@ -25,5 +25,9 @@ const allProducts = async (req, res) => {
     res.status(400).json({ message: "Invalid category id", data: [] });
   }
 };
+
+function formatPrice(input) {
+  return input.toFixed(2);
+}
 
 module.exports = { allProducts };
