@@ -7,10 +7,9 @@ const singleProduct = async (req, res) => {
   try {
     const db = await mysql.createConnection(dbSettings);
     const productRow = await db.query(
-      `SELECT products.id, products.name, products.width, products.height, products.depth, products.price, products.stock, products.related, products.color, categories.id as categoryId FROM products LEFT JOIN categories ON products.name = categories.category  WHERE products.id = ?`,
+      `SELECT products.name, products.width, products.height, products.depth, products.price, products.stock, products.related, products.color, categories.id as categoryId FROM products LEFT JOIN categories ON products.name = categories.category  WHERE products.id = ?`,
       [productId]
     );
-
     const productData = productRow[0];
     const product = {
       categoryId: productData.categoryId,
