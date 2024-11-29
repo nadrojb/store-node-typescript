@@ -2,20 +2,20 @@ const mysql = require("promise-mysql");
 const dbSettings = require("../../environments");
 
 const allProducts = async (req, res) => {
-  cat = req.query.cat;
-  inStockOnly = req.query.inStockOnly || 0;
+  let cat = req.query.cat;
+  let instockonly = parseInt(req.query.instockonly || 0);
   try {
     const db = await mysql.createConnection(dbSettings);
-    const sqlQuery = `
+    let sqlQuery = `
     SELECT products.id, products.name, products.price, products.stock, products.color
     FROM products
     LEFT JOIN categories ON products.name = categories.category
-    WHERE categories.id = ?;
+    WHERE categories.id = ?
   `;
-    const queryParams = [cat, inStockOnly];
+    let queryParams = [cat];
 
-    if (inStockOnly === 1) {
-      sqlQuery += "AND products.stock = > 0";
+    if (instockonly === 1) {
+      sqlQuery += ` AND products.stock > 1;`;
     }
 
     const rows = await db.query(sqlQuery, queryParams);
