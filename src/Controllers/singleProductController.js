@@ -1,5 +1,6 @@
 const mysql = require("promise-mysql");
 const dbSettings = require("../../environments");
+const convertPrice = require("./Services/currencyConversion").convertPrice;
 
 const singleProduct = async (req, res) => {
   let productId = req.query.id;
@@ -44,21 +45,6 @@ function convertUnit(unit, input) {
     return result.toFixed(2);
   } else if (unit == "ft") {
     let result = input * 0.00328084;
-    return result.toFixed(2);
-  }
-}
-
-function convertPrice(currency, input) {
-  if (currency == "GBP") {
-    return input.toFixed(2);
-  } else if (currency == "EUR") {
-    let result = input * 1.2;
-    return result.toFixed(2);
-  } else if (currency == "USD") {
-    let result = input * 1.27;
-    return result.toFixed(2);
-  } else if (currency == "YEN") {
-    let result = input * 190.79;
     return result.toFixed(2);
   }
 }
