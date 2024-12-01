@@ -4,6 +4,7 @@ const dbSettings = require("../../environments");
 const singleProduct = async (req, res) => {
   let productId = req.query.id;
   let unit = req.query.unit;
+  let currency = req.query.currency;
 
   try {
     const db = await mysql.createConnection(dbSettings);
@@ -17,7 +18,7 @@ const singleProduct = async (req, res) => {
       width: convertUnit(unit, productData.width),
       height: convertUnit(unit, productData.height),
       depth: convertUnit(unit, productData.depth),
-      price: formatPrice(productData.price),
+      price: convertPrice(currency, productData.price),
       stock: productData.stock,
       related: productData.related,
       color: productData.color,
@@ -47,6 +48,21 @@ function convertUnit(unit, input) {
     return result.toFixed(2);
   } else if (unit == "ft") {
     let result = input * 0.00328084;
+    return result.toFixed(2);
+  }
+}
+
+function convertPrice(currency, input) {
+  if (currency == "GBP") {
+    return input.toFixed(2);
+  } else if (currency == "EUR") {
+    let result = input * 1.2;
+    return result.toFixed(2);
+  } else if (currency == "USD") {
+    let result = input * 1.27;
+    return result.toFixed(2);
+  } else if (currency == "YEN") {
+    let result = input * 190.79;
     return result.toFixed(2);
   }
 }
