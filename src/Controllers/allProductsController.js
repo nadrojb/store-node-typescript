@@ -1,8 +1,10 @@
 const mysql = require("promise-mysql");
 const dbSettings = require("../../environments");
+const convertPrice = require("./Services/currencyConversion").convertPrice;
 
 const allProducts = async (req, res) => {
   let cat = req.query.cat;
+  let currency = req.query.currency;
   let instockonly = parseInt(req.query.instockonly || 0);
   try {
     const db = await mysql.createConnection(dbSettings);
@@ -22,7 +24,7 @@ const allProducts = async (req, res) => {
 
     const products = rows.map((row) => ({
       id: row.id,
-      price: formatPrice(row.price),
+      price: convertPrice(currency, row.price),
       stock: row.stock,
       color: row.color,
     }));
@@ -35,9 +37,5 @@ const allProducts = async (req, res) => {
     res.status(400).json({ message: "Invalid category id", data: [] });
   }
 };
-
-function formatPrice(input) {
-  return input.toFixed(2);
-}
 
 module.exports = { allProducts };

@@ -1,6 +1,7 @@
 const mysql = require("promise-mysql");
 const dbSettings = require("../../environments");
 const convertPrice = require("./Services/currencyConversion").convertPrice;
+const convertUnit = require("./Services/unitConversion").convertUnit;
 
 const singleProduct = async (req, res) => {
   let productId = req.query.id;
@@ -33,20 +34,5 @@ const singleProduct = async (req, res) => {
     res.status(500).json({ message: "Invalid product id", data: [] });
   }
 };
-
-function convertUnit(unit, input) {
-  if (unit == "mm") {
-    return input;
-  } else if (unit == "cm") {
-    let result = input * 0.1;
-    return result.toFixed(2);
-  } else if (unit == "in") {
-    let result = input * 0.0393701;
-    return result.toFixed(2);
-  } else if (unit == "ft") {
-    let result = input * 0.00328084;
-    return result.toFixed(2);
-  }
-}
 
 module.exports = { singleProduct };
