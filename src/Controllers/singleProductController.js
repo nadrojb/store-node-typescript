@@ -33,10 +33,6 @@ const singleProduct = async (req, res) => {
   }
 };
 
-function formatPrice(input) {
-  return input.toFixed(2);
-}
-
 function convertUnit(unit, input) {
   if (unit == "mm") {
     return input;
