@@ -1,6 +1,6 @@
-function convertUnit(unit, input) {
+function convertUnit(unit: string, input: number): string {
   if (unit == "mm") {
-    return input;
+    return input.toString();
   } else if (unit == "cm") {
     let result = input * 0.1;
     return result.toFixed(2);
