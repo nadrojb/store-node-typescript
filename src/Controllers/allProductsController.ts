@@ -1,9 +1,9 @@
-const mysql = require("promise-mysql");
-const dbSettings = require("../../environments.ts");
-const convertPrice = require("./Services/currencyConversion").convertPrice;
+import mysql from "promise-mysql";
+import { dbSettings } from "../../environments";
+import { convertPrice } from "./Services/currencyConversion";
 
-const allProducts = async (req, res) => {
-  let cat = req.query.cat;
+export const allProducts = async (req, res) => {
+  let cat: string = req.query.cat;
   let currency = req.query.currency;
   let instockonly = parseInt(req.query.instockonly || 0);
   try {
@@ -37,5 +37,3 @@ const allProducts = async (req, res) => {
     res.status(400).json({ message: "Invalid category id", data: [] });
   }
 };
-
-module.exports = { allProducts };

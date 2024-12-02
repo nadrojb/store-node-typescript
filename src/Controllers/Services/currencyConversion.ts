@@ -1,4 +1,4 @@
-function convertPrice(currency: string, input: number): string {
+export function convertPrice(currency: string, input: number): string {
   if (currency == "GBP") {
     return input.toFixed(2);
   } else if (currency == "EUR") {
@@ -9,8 +9,6 @@ function convertPrice(currency: string, input: number): string {
     return result.toFixed(2);
   } else if (currency == "YEN") {
     let result = input * 190.79;
-    return result.toFixed(2);
+    return result.toFixed(0);
   }
 }
-
-module.exports = { convertPrice };

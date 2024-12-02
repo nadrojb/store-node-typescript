@@ -1,9 +1,9 @@
-const mysql = require("promise-mysql");
-const dbSettings = require("../../environments");
-const convertPrice = require("./Services/currencyConversion").convertPrice;
-const convertUnit = require("./Services/unitConversion").convertUnit;
+import mysql from "promise-mysql";
+import { dbSettings } from "../../environments";
+import { convertPrice } from "./Services/currencyConversion";
+import { convertUnit } from "./Services/unitConversion";
 
-const singleProduct = async (req, res) => {
+export const singleProduct = async (req, res) => {
   let productId = req.query.id;
   let unit = req.query.unit;
   let currency = req.query.currency;
@@ -34,5 +34,3 @@ const singleProduct = async (req, res) => {
     res.status(500).json({ message: "Invalid product id", data: [] });
   }
 };
-
-module.exports = { singleProduct };

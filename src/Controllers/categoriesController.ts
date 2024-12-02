@@ -1,7 +1,7 @@
-const mysql = require("promise-mysql");
-const dbSettings = require("../../environments.ts");
+import mysql from "promise-mysql";
+import { dbSettings } from "../../environments";
 
-const categories = async (req, res) => {
+export const categories = async (req, res) => {
   try {
     const db = await mysql.createConnection(dbSettings);
     const output =
@@ -26,5 +26,3 @@ const categories = async (req, res) => {
     res.status(500).json({ message: "An error occurred.", error: err.message });
   }
 };
-
-module.exports = { categories };

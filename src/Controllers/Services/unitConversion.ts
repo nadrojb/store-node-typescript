@@ -1,4 +1,4 @@
-function convertUnit(unit: string, input: number): string {
+export function convertUnit(unit: string, input: number): string {
   if (unit == "mm") {
     return input.toString();
   } else if (unit == "cm") {
@@ -13,4 +13,4 @@ function convertUnit(unit: string, input: number): string {
   }
 }
 
-module.exports = { convertUnit };
+
