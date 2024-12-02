@@ -2,9 +2,17 @@ import mysql from "promise-mysql";
 import { dbSettings } from "../../environments";
 import { convertPrice } from "./Services/currencyConversion";
 
+interface ProductRow {
+  id: number;
+  name: string;
+  price: number;
+  stock: number;
+  color: string;
+}
+
 export const allProducts = async (req, res) => {
   let cat: string = req.query.cat;
-  let currency = req.query.currency;
+  let currency: string = req.query.currency;
   let instockonly = parseInt(req.query.instockonly || 0);
   try {
     const db = await mysql.createConnection(dbSettings);
@@ -20,7 +28,7 @@ export const allProducts = async (req, res) => {
       sqlQuery += ` AND products.stock > 1;`;
     }
 
-    const rows = await db.query(sqlQuery, queryParams);
+    const rows: ProductRow[] = await db.query(sqlQuery, queryParams);
 
     const products = rows.map((row) => ({
       id: row.id,
