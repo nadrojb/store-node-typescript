@@ -1,0 +1,9 @@
+{
+  "files": ["main.ts"],
+  "include": ["./src/**/*.ts"],
+  "compilerOptions": {
+    "target": "ES6",
+    "checkJs": false,
+    "module": "NodeNext"
+  }
+}

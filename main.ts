@@ -4,7 +4,7 @@ const mysql = require("promise-mysql");
 const categoriesController = require("./src/Controllers/categoriesController");
 const allProductsController = require("./src/Controllers/allProductsController");
 const singleProductController = require("./src/Controllers/singleProductController");
-const dbSettings = require("./environments");
+const dbSettings = require("./environments.ts");
 const app = express();
 const port = 3001;
 app.use(cors());

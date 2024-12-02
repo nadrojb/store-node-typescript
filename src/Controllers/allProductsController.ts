@@ -1,5 +1,5 @@
 const mysql = require("promise-mysql");
-const dbSettings = require("../../environments");
+const dbSettings = require("../../environments.ts");
 const convertPrice = require("./Services/currencyConversion").convertPrice;
 
 const allProducts = async (req, res) => {

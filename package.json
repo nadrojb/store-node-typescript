@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc --project tsconfig.json",
+    "dev": "nodemon --ext ts --exec ts-node main.ts"
   },
   "author": "",
   "license": "ISC",

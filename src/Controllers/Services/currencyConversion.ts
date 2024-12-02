@@ -1,6 +1,6 @@
-function convertPrice(currency, input) {
+function convertPrice(currency: string, input: number): number {
   if (currency == "GBP") {
-    return input.toFixed(2);
+    return Number(input.toFixed(2));
   } else if (currency == "EUR") {
     let result = input * 1.2;
     return result.toFixed(2);

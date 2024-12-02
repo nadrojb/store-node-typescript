@@ -1,5 +1,5 @@
 const mysql = require("promise-mysql");
-const dbSettings = require("../../environments");
+const dbSettings = require("../../environments.ts");
 
 const categories = async (req, res) => {
   try {
