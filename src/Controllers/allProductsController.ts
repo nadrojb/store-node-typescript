@@ -10,9 +10,11 @@ interface ProductRow {
   color: string;
 }
 
+type acceptableCurrency = "GBP" | "USD" | "EUR" | "YEN";
+
 export const allProducts = async (req, res) => {
   let cat: string = req.query.cat;
-  let currency: string = req.query.currency;
+  let currency: acceptableCurrency = req.query.currency;
   let instockonly = parseInt(req.query.instockonly || 0);
   try {
     const db = await mysql.createConnection(dbSettings);

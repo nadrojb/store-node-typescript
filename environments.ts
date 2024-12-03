@@ -5,3 +5,4 @@ export const dbSettings = {
   database: "furniture_store",
 };
 
+// const getDatabase
