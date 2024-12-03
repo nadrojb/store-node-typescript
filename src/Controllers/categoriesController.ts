@@ -1,7 +1,9 @@
 import mysql from "promise-mysql";
 import { dbSettings } from "../../environments";
+import { Express } from "express";
+import type { Request, Response } from "express";
 
-export const categories = async (req, res) => {
+export const categories = async (req: Request, res: Response) => {
   try {
     const db = await mysql.createConnection(dbSettings);
     const output =

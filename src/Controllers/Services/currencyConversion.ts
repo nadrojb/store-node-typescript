@@ -1,6 +1,6 @@
 export function convertPrice(currency: "GBP" | "EUR" | "USD" | "YEN", input: number) {
-  
-  if (isNaN(input) || input < 0) {
+
+  if ( isNaN(input) || input < 0) {
     throw new Error("Invalid input: must be a number and not negative.");
   }
 

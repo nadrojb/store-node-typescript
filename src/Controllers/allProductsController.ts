@@ -1,6 +1,8 @@
 import mysql from "promise-mysql";
 import { dbSettings } from "../../environments";
 import { convertPrice } from "./Services/currencyConversion";
+import { Express } from "express";
+import type { Request, Response } from "express";
 
 interface ProductRow {
   id: number;
@@ -12,7 +14,7 @@ interface ProductRow {
 
 type acceptableCurrency = "GBP" | "USD" | "EUR" | "YEN";
 
-export const allProducts = async (req, res) => {
+export const allProducts = async (req: Request, res: Response) => {
   let cat: string = req.query.cat;
   let currency: acceptableCurrency = req.query.currency;
   let instockonly = parseInt(req.query.instockonly || 0);
